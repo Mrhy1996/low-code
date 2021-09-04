@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.mrhy.common.exceptions.GlobalExceptionAutoConfiguration,\
+  com.mrhy.common.swagger.Swagger2AutoConfiguration,\
+  com.mrhy.common.redis.RedisUtilsAutoConfiguration,\
+  com.mrhy.common.resttemplate.RestTemplateAutoConfiguration
