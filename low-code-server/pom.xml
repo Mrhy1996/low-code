@@ -26,14 +26,6 @@
             <artifactId>low-code-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.apache.dubbo</groupId>
-            <artifactId>dubbo-registry-nacos</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba.nacos</groupId>
-            <artifactId>nacos-client</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
             <exclusions>
@@ -74,11 +66,79 @@
             <groupId>org.freemarker</groupId>
             <artifactId>freemarker</artifactId>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>com.alibaba.boot</groupId>-->
-<!--            <artifactId>nacos-config-spring-boot-starter</artifactId>-->
-<!--        </dependency>-->
-
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+        </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.5.6</version>
+                <executions>
+                    <execution>
+                        <id>repackage</id>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <layout>ZIP</layout>
+                    <includes>
+                        <!--这里写你需要打包的模块，可以写多个-->
+                        <include>
+                            <artifactId>low-code-server</artifactId>
+                            <groupId>com.mrhy</groupId>
+                        </include>
+                    </includes>
+                    <mainClass>com.mrhy.server.ServerApplication</mainClass>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.3.0</version>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <!-- 绑定到package生命周期 -->
+                        <phase>package</phase>
+                        <goals>
+                            <!-- 只运行一次 -->
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!-- 配置描述符文件 -->
+                    <descriptors>src/main/assembly/assembly.xml</descriptors>
+                    <!-- 也可以使用Maven预配置的描述符
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs> -->
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-maven-plugin</artifactId>
+                <version>4.6.2</version>
+                <configuration>
+                    <!--properties文件路径，该文件记录了数据库连接信息等-->
+                    <propertyFile>src/main/resources/liquibase.properties</propertyFile>
+                    <propertyFileWillOverride>true</propertyFileWillOverride>
+                    <!--生成文件的路径-->
+                    <outputChangeLogFile>src/main/resources/db/changelog/changelog_dev.xml</outputChangeLogFile>
+                    <!-- <driver>com.mysql.jdbc.Driver</driver>
+                    <url>jdbc:mysql://localhost:3306/test?useUnicode=true&amp;characterEncoding=utf-8</url>
+                    <username>root</username>
+                    <password>egova</password>-->
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

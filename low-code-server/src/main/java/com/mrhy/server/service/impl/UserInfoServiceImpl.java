@@ -2,6 +2,10 @@ package com.mrhy.server.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.cloudwise.aops.metric.rpc.model.dubbo.DubboResponse;
+import com.cloudwise.aops.metric.rpc.model.metricdata.MetricListWithExTimeResultDto;
+import com.cloudwise.aops.metric.rpc.service.DubboMetricDataService;
+import com.github.pagehelper.PageInfo;
 import com.mrhy.common.enums.ObjectResponse;
 import com.mrhy.common.enums.OperationFlag;
 import com.mrhy.common.model.UserInfo;
@@ -24,6 +28,7 @@ import org.springframework.stereotype.Service;
 @Service
 @Log4j2
 public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfoEntity> implements IUserInfoService {
+    DubboMetricDataService metricDataService;
 
     /**
      * @param userInfo 用户实体类

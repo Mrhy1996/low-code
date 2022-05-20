@@ -4,8 +4,17 @@ import java.io.Serializable;
 import java.util.List;
 
 public class DubboInnerRequest  implements Serializable {
+    /**
+     * 类名
+     */
     private String resource;
+    /**
+     * 方法名
+     */
     private String subResource;
+    /**
+     * 参数
+     */
     private List<Object>params;
 
     public String getResource() {

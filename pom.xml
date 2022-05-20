@@ -19,7 +19,9 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <project.version>1.0-SNAPSHOT</project.version>
-        <spring.version>2.3.0.RELEASE</spring.version>
+        <spring.version>2.3.12.RELEASE</spring.version>
+        <spring.cloud-version>Hoxton.SR12</spring.cloud-version>
+        <spring-cloud-alibaba.version>2.2.7.RELEASE</spring-cloud-alibaba.version>
         <clickhouse.version>0.2.4</clickhouse.version>
         <lombok.version>1.18.16</lombok.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
@@ -30,33 +32,45 @@
         <commons-io.version>2.10.0</commons-io.version>
         <redisson.version>3.16.1</redisson.version>
         <dubbo-spring.version>2.7.6</dubbo-spring.version>
-        <dubbo.version>2.7.9</dubbo.version>
+        <dubbo.version>2.7.12</dubbo.version>
         <nacos.version>2.7.3</nacos.version>
-        <nacos-client.version>1.4.0</nacos-client.version>
+        <nacos-client.version>2.0.3</nacos-client.version>
         <mysql-connector.version>8.0.25</mysql-connector.version>
         <mybatis-plus.version>3.4.2</mybatis-plus.version>
         <mybatis-plus-generator.version>3.4.1</mybatis-plus-generator.version>
         <velocity-engine-core.version>2.3</velocity-engine-core.version>
         <freemarker.version>2.3.30</freemarker.version>
-        <spring.cloud-version>Hoxton.SR4</spring.cloud-version>
-        <nacos-config.version>2021.1</nacos-config.version>
-        <spring-cloud-alibaba.version>2.2.1.RELEASE</spring-cloud-alibaba.version>
+        <liquibase-core.version>4.6.2</liquibase-core.version>
+
+
     </properties>
     <dependencyManagement>
         <dependencies>
-            <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-parent -->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-parent</artifactId>
-                <version>${spring.version}</version>
-                <type>pom</type>
-            </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
                 <version>${spring.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring.cloud-version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo</artifactId>
+                <version>${dubbo.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.mybatis.spring.boot</groupId>
@@ -114,25 +128,6 @@
                 <version>${project.version}</version>
             </dependency>
 
-
-            <!-- https://mvnrepository.com/artifact/org.apache.dubbo/dubbo-spring-boot-starter -->
-            <dependency>
-                <groupId>org.apache.dubbo</groupId>
-                <artifactId>dubbo-spring-boot-starter</artifactId>
-                <version>${dubbo-spring.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.apache.dubbo</groupId>
-                        <artifactId>dubbo</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.dubbo</groupId>
-                <artifactId>dubbo</artifactId>
-                <version>${dubbo.version}</version>
-            </dependency>
-
             <dependency>
                 <groupId>com.mrhy</groupId>
                 <artifactId>low-code-api</artifactId>
@@ -168,40 +163,10 @@
                 <version>${freemarker.version}</version>
             </dependency>
 
-
             <dependency>
-                <groupId>org.apache.dubbo</groupId>
-                <artifactId>dubbo-registry-nacos</artifactId>
-                <version>${nacos.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.alibaba.nacos</groupId>
-                <artifactId>nacos-client</artifactId>
-                <version>${nacos-client.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring.cloud-version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.alibaba.cloud</groupId>
-                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
-                <version>${spring-cloud-alibaba.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-
-
-            <!-- https://mvnrepository.com/artifact/com.alibaba.cloud/spring-cloud-starter-alibaba-nacos-config -->
-            <dependency>
-                <groupId>com.alibaba.cloud</groupId>
-                <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
-                <version>${nacos-config.version}</version>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-core</artifactId>
+                <version>${liquibase-core.version}</version>
             </dependency>
 
         </dependencies>

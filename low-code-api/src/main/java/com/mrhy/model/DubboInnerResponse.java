@@ -3,10 +3,25 @@ package com.mrhy.model;
 import java.io.Serializable;
 
 public class DubboInnerResponse implements Serializable {
+    /**
+     * 状态码
+     */
     private Integer status;
+    /**
+     * 响应消息
+     */
     private String message;
+    /**
+     * 类名
+     */
     private String clazzName;
+    /**
+     * 方法名
+     */
     private String methodName;
+    /**
+     * 具体结果
+     */
     private Object response;
 
     public DubboInnerResponse(Integer status, String message) {
